@@ -216,14 +216,29 @@ def hangman(secret_word):
             # If the user has warnings remaining they lose one warning
             if warnings_remaining > 0:
                 warnings_remaining -= 1
-                print('Opps! That is not a valid letter. You have', warnings_remaining, 'warnings left:', get_available_letters(letter_guessed) )
+                print('Opps! That is not a valid letter. You have', warnings_remaining, 'warnings left:', get_available_letters(letter_guessed))
             else:
                 guesses_remaining -= 1
-                print('Opps! That is not a valid letter and you have no warnings left. You have', guesses_remaining , 'guesses left:', get_available_letters(letter_guessed) )
+                print('Opps! That is not a valid letter and you have no warnings left. You have', guesses_remaining , 'guesses left:', get_available_letters(letter_guessed))
         else:
-            
-             
-                
+            if letter_guessed not in secret_word:
+                print('Opps! that letter is not in my word:', get_guessed_word(secret_word, letters_guessed))
+                guesses_remaining -= 1
+            else:
+                if letter_guessed in letters_guessed:
+                    if warnings_remaining > 0:
+                        warnings_remaining -= 1
+                        print('Opps! You have already guessed that letter. You have', warnings_remaining, 'warnings left:', get_guessed_word(secret_word, letters_guessed))
+                    else:
+                        guesses_remaining -= 1
+                        print('Opps! You have already guessed that letter. You have no warnings left, so you lose a guess. You have', guesses_remaining, 'guesses left:', get_guessed_word(secret_word, letters_guessed)) 
+                else:
+                    print('Good guess:', get_guessed_word(secret_word, letters_guessed))
+        print('_ _ _ _ _ _ _ _ _ _ _ _')   
+        if is_word_guessed(secret_word, letters_guessed):
+            print('Congratulations you won! Your total score for this game is', guesses_remaining * len(secret_word) )
+        if guesses_remaining < 1:
+            print('Sorry you ran out of guesses.  The secret word was', secret_word)
         
         # This deals with the user input if it is valid and they still have guesses remaining
         # if letter_guessed.isalpha():
@@ -231,12 +246,8 @@ def hangman(secret_word):
                 
             
             
-                
-            
-            
-            
         # break just for testing; delete later
-        break
+        # break
     
     
     pass
