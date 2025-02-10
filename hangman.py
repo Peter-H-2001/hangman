@@ -222,6 +222,7 @@ def hangman(secret_word):
                 print('Opps! That is not a valid letter and you have no warnings left. You have', guesses_remaining , 'guesses left:', get_available_letters(letter_guessed))
         else:
             if letter_guessed not in secret_word:
+                letters_guessed.append(letter_guessed)
                 print('Opps! that letter is not in my word:', get_guessed_word(secret_word, letters_guessed))
                 guesses_remaining -= 1
             else:
@@ -233,6 +234,7 @@ def hangman(secret_word):
                         guesses_remaining -= 1
                         print('Opps! You have already guessed that letter. You have no warnings left, so you lose a guess. You have', guesses_remaining, 'guesses left:', get_guessed_word(secret_word, letters_guessed)) 
                 else:
+                    letters_guessed.append(letter_guessed)
                     print('Good guess:', get_guessed_word(secret_word, letters_guessed))
         print('_ _ _ _ _ _ _ _ _ _ _ _')   
         if is_word_guessed(secret_word, letters_guessed):
