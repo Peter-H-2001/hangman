@@ -207,34 +207,45 @@ def hangman(secret_word):
                 warnings_remaining -= 1
                 print('Opps! That is not a valid letter. You have', warnings_remaining,
                       'warnings left:', get_available_letters(letter_guessed))
+            # If no warnings left then they lose a guess
             else:
                 guesses_remaining -= 1
                 print('Opps! That is not a valid letter and you have no warnings left. You have',
                       guesses_remaining, 'guesses left:', get_available_letters(letter_guessed))
+        # The guess is valid
         else:
+            # letter not in secret word, so lose a guess
             if letter_guessed not in secret_word:
                 letters_guessed.append(letter_guessed)
                 print('Opps! that letter is not in my word:',
                       get_guessed_word(secret_word, letters_guessed))
                 guesses_remaining -= 1
+            # letter is in secret word
             else:
+                # letter already guessed so lose a guess or a warning
                 if letter_guessed in letters_guessed:
+                    # warning remaining so lose a warning
                     if warnings_remaining > 0:
                         warnings_remaining -= 1
                         print('Opps! You have already guessed that letter. You have', warnings_remaining,
                               'warnings left:', get_guessed_word(secret_word, letters_guessed))
+                    # no warnings remaining so lose a guess
                     else:
                         guesses_remaining -= 1
                         print('Opps! You have already guessed that letter. You have no warnings left, so you lose a guess. You have',
                               guesses_remaining, 'guesses left:', get_guessed_word(secret_word, letters_guessed))
+                # Horray !  The guessed letter is valid, is in the secret word and hasn't already been guessed.
                 else:
                     letters_guessed.append(letter_guessed)
                     print('Good guess:', get_guessed_word(
                         secret_word, letters_guessed))
+        # print statement to separate guesses
         print('_ _ _ _ _ _ _ _ _ _ _ _')
+        # Check to see if game is won
         if is_word_guessed(secret_word, letters_guessed):
             print('Congratulations you won! Your total score for this game is',
                   guesses_remaining * len(secret_word))
+        # Check to see if game is lost
         if guesses_remaining < 1:
             print('Sorry you ran out of guesses.  The secret word was', secret_word)
 
