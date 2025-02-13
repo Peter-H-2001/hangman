@@ -190,7 +190,7 @@ def hangman(secret_word):
     # Main game loop: continues until the player either wins or runs out of guesses
 
     # runs until word is guessed is true or number of guesses is zero
-    while not is_word_guessed or guesses_remaining > 0:
+    while not is_word_guessed(secret_word, letters_guessed) or guesses_remaining == 0:
         # Print how many guesses are left
         print('You have', guesses_remaining, 'guesses left.')
         # Print how many warnings are left
@@ -205,13 +205,15 @@ def hangman(secret_word):
             # If the user has warnings remaining they lose one warning
             if warnings_remaining > 0:
                 warnings_remaining -= 1
-                print('Opps! That is not a valid letter. You have', warnings_remaining,
-                      'warnings left:', get_available_letters(letter_guessed))
+                # print('Opps! That is not a valid letter. You have', warnings_remaining,
+                #       'warnings left:', get_available_letters(letter_guessed))
+                print('Opps! That is not a valid letter.')
             # If no warnings left then they lose a guess
             else:
                 guesses_remaining -= 1
-                print('Opps! That is not a valid letter and you have no warnings left. You have',
-                      guesses_remaining, 'guesses left:', get_available_letters(letter_guessed))
+                # print('Opps! That is not a valid letter and you have no warnings left. You have',
+                #       guesses_remaining, 'guesses left:', get_available_letters(letter_guessed))
+                print('Opps! That is not a valid letter and you have no warnings left.')
         # The guess is valid
         else:
             # letter not in secret word, so lose a guess
@@ -224,6 +226,7 @@ def hangman(secret_word):
             else:
                 # letter already guessed so lose a guess or a warning
                 if letter_guessed in letters_guessed:
+                    letters_guessed.append(letter_guessed)
                     # warning remaining so lose a warning
                     if warnings_remaining > 0:
                         warnings_remaining -= 1
@@ -240,7 +243,7 @@ def hangman(secret_word):
                     print('Good guess:', get_guessed_word(
                         secret_word, letters_guessed))
         # print statement to separate guesses
-        print('_ _ _ _ _ _ _ _ _ _ _ _')
+        print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
         # Check to see if game is won
         if is_word_guessed(secret_word, letters_guessed):
             print('Congratulations you won! Your total score for this game is',
