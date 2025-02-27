@@ -189,7 +189,7 @@ def hangman(secret_word):
 
     # Main game loop: continues until the player either wins or runs out of guesses
 
-    # runs until word is guessed is true or number of guesses is zero
+    # runs until word is guessed is true or number of guesses  is zero
     while not is_word_guessed(secret_word, letters_guessed) or guesses_remaining == 0:
         # Print how many guesses are left
         print('You have', guesses_remaining, 'guesses left.')
@@ -244,6 +244,10 @@ def hangman(secret_word):
                         secret_word, letters_guessed))
         # print statement to separate guesses
         print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
+        
+        # tracking a variable
+        print(guesses_remaining)
+        
         # Check to see if game is won
         if is_word_guessed(secret_word, letters_guessed):
             print('Congratulations you won! Your total score for this game is',
