@@ -190,7 +190,7 @@ def hangman(secret_word):
     # Main game loop: continues until the player either wins or runs out of guesses
 
     # runs until word is guessed is true or number of guesses  is zero
-    while not is_word_guessed(secret_word, letters_guessed) or guesses_remaining == 0:
+    while (not is_word_guessed(secret_word, letters_guessed)) and not guesses_remaining == 0:
         # Print how many guesses are left
         print('You have', guesses_remaining, 'guesses left.')
         # Print how many warnings are left
