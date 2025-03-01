@@ -208,6 +208,7 @@ def hangman(secret_word):
                 # print('Opps! That is not a valid letter. You have', warnings_remaining,
                 #       'warnings left:', get_available_letters(letter_guessed))
                 print('Opps! That is not a valid letter.')
+                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed))
             # If no warnings left then they lose a guess
             else:
                 guesses_remaining -= 1
@@ -245,8 +246,7 @@ def hangman(secret_word):
         # print statement to separate guesses
         print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
         
-        # tracking a variable
-        print(guesses_remaining)
+     
         
         # Check to see if game is won
         if is_word_guessed(secret_word, letters_guessed):
