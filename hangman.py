@@ -139,9 +139,6 @@ def get_available_letters(letters_guessed):
 
     # pass
 
-# # don't know why i wrote this
-# def get_number_of_letters_in_secret_word(secret_word):
-#     return len(secret_word)
 
 
 def hangman(secret_word):
@@ -256,11 +253,7 @@ def hangman(secret_word):
         if guesses_remaining < 1:
             print('Sorry you ran out of guesses.  The secret word was', secret_word)
 
-        # This deals with the user input if it is valid and they still have guesses remaining
-        # if letter_guessed.isalpha():
 
-        # break just for testing; delete later
-        # break
 
     pass
 
