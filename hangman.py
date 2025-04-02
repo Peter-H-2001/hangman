@@ -276,7 +276,23 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
+    # FILL IN YOUR CODE HERE AND DELETE "pass
+    
+    # get rid of spaces in my_word
+    my_word = my_word.replace(" ", "")
+    # If both words aren't the same length then return False
+    if len(my_word) != len(other_word):
+        return False
+    i = 0
+    for letter in my_word:
+        if letter.isalpha():
+            if letter != other_word[i]:
+                return False
+        i +=1
+    return True
+        
+    
+    
     pass
 
 
@@ -291,6 +307,11 @@ def show_possible_matches(my_word):
 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
+    
+    for word in wordlist:
+        if match_with_gaps(my_word, word):
+            print(word)
+    
     pass
 
 
