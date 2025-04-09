@@ -372,6 +372,14 @@ def hangman_with_hints(secret_word):
         print('Available letters:', get_available_letters(letters_guessed))
         # promt for user to guess a letter
         letter_guessed = input('Please guess a letter: ')
+        
+        # if you guess the special character * the computer will find all the words
+        # from its loaded list that might match your current guessed word, and print out each of
+        # them. 
+        if letter_guessed == '*':
+            show_possible_matches(get_guessed_word(secret_word, letters_guessed))
+            
+
 
         # This deals with the user inputting an invalid character
         if not letter_guessed.isalpha():
