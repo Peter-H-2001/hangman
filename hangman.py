@@ -378,11 +378,13 @@ def hangman_with_hints(secret_word):
         # them. 
         if letter_guessed == '*':
             show_possible_matches(get_guessed_word(secret_word, letters_guessed))
+            warnings_remaining += 1
             
 
 
         # This deals with the user inputting an invalid character
         if not letter_guessed.isalpha():
+        # if not (letter_guessed.isalpha() or letter_guessed == '*') :    
             # If the user has warnings remaining they lose one warning
             if warnings_remaining > 0:
                 warnings_remaining -= 1
