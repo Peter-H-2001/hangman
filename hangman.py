@@ -301,36 +301,66 @@ def hangman(secret_word):
     print('_ _ _ _ _ _ _ _ _ _ _ _ _\n')
     
     # WHILE word not guessed AND guesses remaining
-    #   print guesses left, warning and available letters
+    while not is_word_guessed(secret_word, letters_guessed) and guesses_remaining > 0:
+        
+        #   print guesses left, warning and available letters
+        print('You have', guesses_remaining, 'guesses left.')
+        print('You have', warnings_remaining, 'warnings left.')
+        print('Available letters:', get_available_letters(letters_guessed))
     
-    # INPUT:  ask for letter
+        # INPUT:  ask for letter
+        letter_guessed = input('Please guess a letter: ')
+        
+        # ONLY FOR HANGMAN WITH HINTS
+        # IF letter is *:
+        #   print possible words
+        if letter_guessed == '*':
+            show_possible_matches(get_guessed_word(secret_word, letters_guessed))
+        continue
     
-    # ONLY FOR HANGMAN WITH HINTS
-    # IF letter is *:
-    #   print possible words
-    #   CONTINUE
-
-    # IF letter NOT  valid:
-    #   reduce guesses or warnings
-    #   CONTINUE
+        # IF letter NOT  valid:
+        #   reduce guesses or warnings
+        if not letter_guessed.isalpha() or len(letter_guessed) != 1:
+                # If the user has warnings remaining they lose one warning
+                if warnings_remaining > 0:
+                    warnings_remaining -= 1
+                    print('Opps! That is not a valid letter.  You have {warnings_remaining} warnings left.')
+                    print('Guessed so far:', get_guessed_word(secret_word, letters_guessed))
+                # If no warnings left then they lose a guess
+                else:
+                    guesses_remaining -= 1
+                    print("Oops! You've already guessed that letter. You have no warnings left so you lose one guess.")
+                    print("------------")
+                continue
+        
+        
+        # IF already guessed:
+        #   reduce guesses or warnings
+        #       if no warning lef reduce guesses by 1
+              # else reduce warnings by 1
+        if letter_guessed in letters_guessed:
+            if warnings_remaining > 0:
+                warnings_remaining -= 1
+                print("Opps !  You've already guessed that letter; you lose a warning")
+            else:
+                guesses_remaining -= 1
+                print("Opps !   You've already guessed that letter and have no warning left so lose a guess")
+        #   add to letters_guessed
+            letters_guessed.append(letter_guessed)
+        continue
     
-    # IF already guessed:
-    #   reduce guesses or warnings
-    #   add to letters_guessed
-    #   CONTINUE
-
-    # IF guess in secret word:
-    #   print good guess
-    # ELSE:
-    #   reduce guess(2 for vowels)
-    #   print bad guess
+        # IF guess in secret word:
+        #   print good guess
+        # ELSE:
+        #   reduce guess(2 for vowels)
+        #   print bad guess
     
-    # IF win:
-    #   print win and score
-    # 
-    # IF lost:
-    #    print loss and reveal word
-    #   
+        # IF win:
+        #   print win and score
+        # 
+        # IF lost:
+        #    print loss and reveal word
+        #   
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
