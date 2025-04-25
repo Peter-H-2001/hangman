@@ -348,19 +348,28 @@ def hangman(secret_word):
         #   add to letters_guessed
             letters_guessed.append(letter_guessed)
         continue
-    
+ 
         # IF guess in secret word:
-        #   print good guess
+        if letter_guessed in secret_word:
+            letters_guessed.append(letter_guessed)
+            print('Good guess:', get_guessed_word(secret_word, letters_guessed))              
+            print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
+       
         # ELSE:
         #   reduce guess(2 for vowels)
+        
         #   print bad guess
-    
+        
+    # next section is outside the loop
         # IF win:
-        #   print win and score
-        # 
+            if is_word_guessed(secret_word, letters_guessed):
+                   print('Congratulations you won! Your total score for this game is',
+                         guesses_remaining * len(secret_word))
+   
         # IF lost:
-        #    print loss and reveal word
-        #   
+            if guesses_remaining < 1:
+                print('Sorry you ran out of guesses.  The secret word was', secret_word)
+       
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
