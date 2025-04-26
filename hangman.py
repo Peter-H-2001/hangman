@@ -139,8 +139,20 @@ def get_available_letters(letters_guessed):
 
     # pass
 
+def apply_penalties(guesses_remaining, warnings_remaining, letters_guessed):
+    # If the user has warnings remaining they lose one warning
+    if warnings_remaining > 0:
+        warnings_remaining -= 1
+        print('Opps! That is not a valid letter.  You have {warnings_remaining} warnings left.')
+        print('Guessed so far:', get_guessed_word(secret_word, letters_guessed))
+    # If no warnings left then they lose a guess
+    else:
+        guesses_remaining -= 1
+        print("Oops! You've already guessed that letter. You have no warnings left so you lose one guess.")
+        print("------------")
 
 
+    pass
 # def hangman(secret_word):
 #     '''
 #     secret_word: string, the secret word to guess.
@@ -321,16 +333,7 @@ def hangman(secret_word):
         # IF letter NOT  valid:
         #   reduce guesses or warnings
         if not letter_guessed.isalpha() or len(letter_guessed) != 1:
-                # If the user has warnings remaining they lose one warning
-                if warnings_remaining > 0:
-                    warnings_remaining -= 1
-                    print('Opps! That is not a valid letter.  You have {warnings_remaining} warnings left.')
-                    print('Guessed so far:', get_guessed_word(secret_word, letters_guessed))
-                # If no warnings left then they lose a guess
-                else:
-                    guesses_remaining -= 1
-                    print("Oops! You've already guessed that letter. You have no warnings left so you lose one guess.")
-                    print("------------")
+                apply_penalties(guesses_remaining, warnings_remaining, letters_guessed)
                 continue
         
         
