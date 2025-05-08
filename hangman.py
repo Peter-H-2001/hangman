@@ -115,6 +115,8 @@ def get_available_letters(letters_guessed):
     for letter in alphabet:
         if letter not in letters_guessed:
             available_letters += letter
+        else:
+            available_letters += '_'
     # Return the available letters
     return available_letters
 
@@ -254,7 +256,7 @@ def hangman(secret_word):
         # IF guess in secret word:
         if letter_guessed in secret_word:
             letters_guessed.append(letter_guessed)
-            print('Good guess:', get_guessed_word(secret_word, letters_guessed), '\n')
+            print('\nGood guess:', get_guessed_word(secret_word, letters_guessed), '\n')
             print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
        
         # ELSE:
@@ -272,7 +274,7 @@ def hangman(secret_word):
            print('Congratulations you won! Your total score for this game is',
                   guesses_remaining * count_unique_letters(secret_word) )
         # IF lost:
-    if guesses_remaining < 1:
+    elif guesses_remaining < 1:
         print('Sorry you ran out of guesses.  The secret word was', secret_word)
        
 
@@ -297,7 +299,7 @@ def show_possible_matches(my_word):
 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    
+    print()
     for word in wordlist:
         if match_with_gaps(my_word, word):
             print(word)
@@ -368,7 +370,7 @@ def hangman_with_hints(secret_word):
         if letter_guessed == '*':
             show_possible_matches(get_guessed_word(secret_word, letters_guessed))
             print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
-            print('Available letters:', get_available_letters(letters_guessed), '\n')
+            # print('Available letters:', get_available_letters(letters_guessed), '\n')
             print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
             guesses_remaining -= 1
             continue
@@ -415,7 +417,7 @@ def hangman_with_hints(secret_word):
         # IF guess in secret word:
         if letter_guessed in secret_word:
             letters_guessed.append(letter_guessed)
-            print('Good guess:', get_guessed_word(secret_word, letters_guessed), '\n')
+            print('\nGood guess:', get_guessed_word(secret_word, letters_guessed), '\n')
             print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
        
         # ELSE:
@@ -434,7 +436,7 @@ def hangman_with_hints(secret_word):
                  guesses_remaining * count_unique_letters(secret_word))
    
         # IF lost:
-    if guesses_remaining < 1:
+    elif guesses_remaining < 1:
         print('Sorry you ran out of guesses.  The secret word was', secret_word)  
 
 
