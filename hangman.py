@@ -146,12 +146,25 @@ def match_with_gaps(my_word, other_word):
         i +=1
     return True
 
+'''
+ word: string
+        The word to analyze.
 
-def count_unique_letters(s):
+    Returns:
+        int: The number of unique letters in the given word.
+'''
+def count_unique_letters(word):
     unique_letters_set = set()
-    for letter in s:
+    for letter in word:
         unique_letters_set.add(letter)
     return len(unique_letters_set)
+
+'''
+used to display the current status of the player
+'''
+def display_status(secret_word, letters_guessed, guesses_remaining):
+    print('Available letters:', get_available_letters(letters_guessed), '\n')
+    print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
     
     
 
@@ -206,7 +219,7 @@ def hangman(secret_word):
         #   print guesses left, warning and available letters
         print('You have', guesses_remaining, 'guesses left.')
         print('You have', warnings_remaining, 'warnings left.\n')
-        print('Available letters:', get_available_letters(letters_guessed), '\n')
+        display_status(secret_word, letters_guessed, guesses_remaining)
     
         # INPUT:  ask for letter
         letter_guessed = input('Please guess a letter: ')
@@ -222,15 +235,12 @@ def hangman(secret_word):
             if warnings_remaining > 0:
                 warnings_remaining -= 1
                 print('Opps! That is not a valid letter. You have', warnings_remaining,'warnings left:', '\n')
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             # If no warnings left then they lose a guess
             else:
                 guesses_remaining -= 1
-                # print('Opps! That is not a valid letter and you have no warnings left. You have',
-                #       guesses_remaining, 'guesses left:', get_available_letters(letter_guessed))
                 print('Opps! That is not a valid letter and you have no warnings left.\n')
-                print('Available letters:', get_available_letters(letters_guessed))
+                display_status(secret_word, letters_guessed, guesses_remaining)
         
             continue
         
@@ -243,13 +253,11 @@ def hangman(secret_word):
             if warnings_remaining > 0:
                 warnings_remaining -= 1
                 print("Opps !  You've already guessed that letter; you lose a warning\n")
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             else:
                 guesses_remaining -= 1
                 print("Opps !   You've already guessed that letter and have no warning left so lose a guess\n")  
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             
             continue
  
@@ -357,7 +365,7 @@ def hangman_with_hints(secret_word):
         #   print guesses left, warning and available letters
         print('You have', guesses_remaining, 'guesses left.')
         print('You have', warnings_remaining, 'warnings left.\n')
-        print('Available letters:', get_available_letters(letters_guessed), '\n')
+        display_status(secret_word, letters_guessed, guesses_remaining)
     
         # INPUT:  ask for letter
         letter_guessed = input('Please guess a letter: ')
@@ -370,7 +378,6 @@ def hangman_with_hints(secret_word):
         if letter_guessed == '*':
             show_possible_matches(get_guessed_word(secret_word, letters_guessed))
             print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
-            # print('Available letters:', get_available_letters(letters_guessed), '\n')
             print('\n_ _ _ _ _ _ _ _ _ _ _ _\n\n')
             guesses_remaining -= 1
             continue
@@ -383,16 +390,12 @@ def hangman_with_hints(secret_word):
             if warnings_remaining > 0:
                 warnings_remaining -= 1
                 print('Opps! That is not a valid letter. You have', warnings_remaining,'warnings left:', '\n')
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             # If no warnings left then they lose a guess
             else:
                 guesses_remaining -= 1
-                # print('Opps! That is not a valid letter and you have no warnings left. You have',
-                #       guesses_remaining, 'guesses left:', get_available_letters(letter_guessed))
                 print('Opps! That is not a valid letter and you have no warnings left.\n')
-                print('Available letters:', get_available_letters(letters_guessed))
-        
+                display_status(secret_word, letters_guessed, guesses_remaining)
             continue
         
         
@@ -404,13 +407,11 @@ def hangman_with_hints(secret_word):
             if warnings_remaining > 0:
                 warnings_remaining -= 1
                 print("Opps !  You've already guessed that letter; you lose a warning\n")
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             else:
                 guesses_remaining -= 1
                 print("Opps !   You've already guessed that letter and have no warning left so lose a guess\n")  
-                print('Available letters:', get_available_letters(letters_guessed), '\n')
-                print('Guessed so far:', get_guessed_word(secret_word, letters_guessed), '\n')
+                display_status(secret_word, letters_guessed, guesses_remaining)
             
             continue
  
